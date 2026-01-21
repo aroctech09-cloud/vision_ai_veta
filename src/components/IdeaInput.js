@@ -8,7 +8,7 @@ import { Loader2, Zap, Mic, MicOff } from 'lucide-react';
 // ==========================================================
 const INPUT_TEXTS = {
   es: {
-    placeholder: 'Describe tu idea para mejorar un proceso o producto BIC (ej: "Usar plástico reciclado en el cuerpo del lapicero").',
+    placeholder: 'Describe tu idea para mejorar un proceso o producto (ej: "Usar plástico reciclado en el cuerpo del lapicero").',
     button: 'Generar Mejora',
   },
   en: {
@@ -16,11 +16,11 @@ const INPUT_TEXTS = {
     button: 'Generate Enhancement',
   },
   fr: {
-    placeholder: 'Décrivez votre idée pour améliorer un processus ou un produit BIC (ex: "Utiliser du plastique recyclé dans le corps du stylo").',
+    placeholder: 'Décrivez votre idée pour améliorer un processus ou un produit (ex: "Utiliser du plastique recyclé dans le corps du stylo").',
     button: 'Générer l\'Amélioration',
   },
   pt: {
-    placeholder: 'Descreva sua ideia para melhorar um processo ou produto BIC (ex: "Usar plástico reciclado no corpo da caneta").',
+    placeholder: 'Descreva sua ideia para melhorar um processo ou produto (ex: "Usar plástico reciclado no corpo da caneta").',
     button: 'Gerar Melhoria',
   }
 };
