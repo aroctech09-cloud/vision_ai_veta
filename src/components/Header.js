@@ -1,9 +1,8 @@
-// Header.js (Modificado)
-import React, { useState } from 'react'; // ¡Añadido useState!
-import { motion, AnimatePresence } from 'framer-motion'; // ¡Añadido AnimatePresence!
-import { History, Globe, ChevronDown, Check } from 'lucide-react'; // ¡Añadidos ChevronDown y Check!
+// Header.js (Modificado - Sin el botón de historial)
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Globe, ChevronDown, Check } from 'lucide-react'; // Eliminamos History de aquí
 
-// Lista de idiomas disponibles y sus códigos
 const LANGUAGES = [
   { code: 'es', display: 'ES', name: 'Español', tooltip: 'Cambiar a Español' },
   { code: 'en', display: 'EN', name: 'English', tooltip: 'Switch to English' },
@@ -11,18 +10,15 @@ const LANGUAGES = [
   { code: 'pt', display: 'PT', name: 'Português', tooltip: 'Mudar para Português' },
 ];
 
-// Aceptar las props onToggleHistory, currentLang, setLanguage y historyTooltip (nueva prop de App.js)
-const Header = ({ onToggleHistory, currentLang, setLanguage, historyTooltip }) => {
+const Header = ({ currentLang, setLanguage }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   
-  // Encontrar la información del idioma actual para mostrarla en el botón
-  const currentLangInfo = LANGUAGES.find(lang => lang.code === currentLang) || LANGUAGES[0]; // Fallback a Español
+  const currentLangInfo = LANGUAGES.find(lang => lang.code === currentLang) || LANGUAGES[0];
   const langTooltip = `${currentLangInfo.name} (Current: ${currentLangInfo.display})`; 
 
-  // Función para manejar el cambio de idioma
   const handleLanguageChange = (code) => {
       setLanguage(code);
-      setIsDropdownOpen(false); // Cierra el menú después de seleccionar
+      setIsDropdownOpen(false);
   }
 
   return (
@@ -32,13 +28,12 @@ const Header = ({ onToggleHistory, currentLang, setLanguage, historyTooltip }) =
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
-        {/* SECCIÓN DEL LOGO Y TÍTULO */}
+      {/* SECCIÓN DEL LOGO Y TÍTULO */}
       <div className="flex items-center space-x-3">
-        {/* Logo imponente */}
         <motion.img 
-          src="/Logo_Vision.png" // Asegúrate de que el nombre coincida con tu archivo en 'public'
+          src="/Logo_Vision.png" 
           alt="Vision AI Logo"
-          className="w-12 h-12 object-contain" // Tamaño ajustable
+          className="w-12 h-12 object-contain"
           whileHover={{ rotate: 5, scale: 1.1 }}
         />
         <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-yellow-500 bg-clip-text text-transparent">
@@ -46,10 +41,10 @@ const Header = ({ onToggleHistory, currentLang, setLanguage, historyTooltip }) =
         </h1>
       </div>
       
-      {/* Contenedor para agrupar los botones */}
+      {/* Contenedor para agrupar los botones (Ahora solo tiene el idioma) */}
       <div className="flex space-x-4"> 
         
-        {/* NUEVO: Botón de Selector de Idioma (con Dropdown) */}
+        {/* Selector de Idioma */}
         <div className="relative">
             <motion.button
                 onClick={() => setIsDropdownOpen(prev => !prev)}
@@ -61,11 +56,9 @@ const Header = ({ onToggleHistory, currentLang, setLanguage, historyTooltip }) =
             >
                 <Globe className="w-6 h-6 mr-1" />
                 <span className="font-bold text-sm">{currentLangInfo.display}</span>
-                {/* Flecha que rota para indicar el estado del dropdown */}
                 <ChevronDown className={`w-4 h-4 ml-1 transition-transform ${isDropdownOpen ? 'rotate-180' : 'rotate-0'}`} />
             </motion.button>
 
-            {/* Dropdown de Idiomas */}
             <AnimatePresence>
                 {isDropdownOpen && (
                     <motion.div
@@ -93,20 +86,7 @@ const Header = ({ onToggleHistory, currentLang, setLanguage, historyTooltip }) =
                 )}
             </AnimatePresence>
         </div>
-
-
-        {/* Botón para abrir el historial (usa el nuevo prop 'historyTooltip') */}
-        <motion.button
-          onClick={onToggleHistory}
-          className="p-3 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 transition-colors shadow-md"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          aria-label={historyTooltip}
-          title={historyTooltip}
-        >
-          <History className="w-6 h-6" />
-        </motion.button>
-      </div> {/* Fin del Contenedor de Botones */}
+      </div> 
     </motion.div>
   );
 };
