@@ -32,9 +32,19 @@ const Header = ({ onToggleHistory, currentLang, setLanguage, historyTooltip }) =
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-yellow-500 bg-clip-text text-transparent">
-        Vision AI 
-      </h1>
+        {/* SECCIÓN DEL LOGO Y TÍTULO */}
+      <div className="flex items-center space-x-3">
+        {/* Logo imponente */}
+        <motion.img 
+          src="/Logo_Vision.png" // Asegúrate de que el nombre coincida con tu archivo en 'public'
+          alt="Vision AI Logo"
+          className="w-12 h-12 object-contain" // Tamaño ajustable
+          whileHover={{ rotate: 5, scale: 1.1 }}
+        />
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-yellow-500 bg-clip-text text-transparent">
+          Vision AI 
+        </h1>
+      </div>
       
       {/* Contenedor para agrupar los botones */}
       <div className="flex space-x-4"> 
