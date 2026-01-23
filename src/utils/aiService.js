@@ -3,10 +3,18 @@ import { supabase } from './supabaseClient';
 
 
 // MODIFICACIÓN CLAVE: Usar la variable de entorno con prefijo
-const openai = new OpenAI({ 
-  apiKey: process.env.REACT_APP_OPENAI_API_KEY, 
-  dangerouslyAllowBrowser: true // Solo para pruebas; quítalo en producción real 
-}); 
+// MODIFICACIÓN CLAVE: Usar la variable de entorno con prefijo
+const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
+
+// Verificación de seguridad para evitar que la app salga en blanco
+if (!apiKey) {
+  console.error("⚠️ La API Key de OpenAI no está configurada en las variables de entorno.");
+}
+
+const openai = new OpenAI({ 
+  apiKey: apiKey || '', // Evita que el constructor falle si está vacío
+  dangerouslyAllowBrowser: true 
+});
 
 // =======================================================================
 // ESTRUCTURA JSON DE SALIDA (OUTPUT_FORMAT)
